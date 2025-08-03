@@ -1,4 +1,4 @@
-# Nuxt 4 + TanStack Query Learning Project
+# Vue TanStack Query Nuxt4 Example
 
 A project for learning frontend development using Nuxt 4 and TanStack Query.
 
