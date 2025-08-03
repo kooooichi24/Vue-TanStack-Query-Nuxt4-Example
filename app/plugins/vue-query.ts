@@ -16,7 +16,4 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // VueQueryPluginを設定
   nuxtApp.vueApp.use(VueQueryPlugin, { queryClient })
-
-  // デバッグ用
-  console.log('VueQueryPlugin initialized successfully')
 })
