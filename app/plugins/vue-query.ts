@@ -7,13 +7,11 @@ export default defineNuxtPlugin((nuxtApp) => {
       queries: {
         staleTime: 1000 * 60 * 5,
         retry: 1,
-        // SSR対応
         refetchOnWindowFocus: false,
         refetchOnMount: false,
       },
     },
   })
 
-  // VueQueryPluginを設定
   nuxtApp.vueApp.use(VueQueryPlugin, { queryClient })
 })
