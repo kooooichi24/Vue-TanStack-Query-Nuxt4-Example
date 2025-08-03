@@ -14,15 +14,19 @@ A project for learning frontend development using Nuxt 4 and TanStack Query.
 - Server state management with TanStack Query
 - Modern frontend development practices
 
-## Development Setup
+## Setup
+
+Make sure to install dependencies:
 
 ```bash
 # Install dependencies
 npm install
+```
 
-# Start development server
+## Development Server
+
+Start the development server on `http://localhost:3000`:
+
+```bash
 npm run dev
-
-# Build for production
-npm run build
 ```
