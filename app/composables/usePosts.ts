@@ -22,7 +22,7 @@ async function getPost(id: number) {
 }
 
 // Function to fetch posts list
-async function getPosts() {
+async function listPosts() {
   console.log(`🔄 Fetching posts at ${new Date().toLocaleTimeString()}`)
   
   const response = await fetch('https://jsonplaceholder.typicode.com/posts')
@@ -55,7 +55,7 @@ export function usePosts() {
 
   return useQuery({
     queryKey,
-    queryFn: getPosts,
+    queryFn: listPosts,
     ...DEFAULT_QUERIES_OPTIONS,
     staleTime: 1000 * 60, // Consider fresh for 1 minute
     gcTime: 1000 * 60 * 10, // Keep cache for 10 minutes
