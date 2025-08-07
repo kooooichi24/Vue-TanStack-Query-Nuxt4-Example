@@ -35,17 +35,17 @@ async function listPosts() {
 }
 
 // Composable to fetch post with current second
-export function useReactiveCurrentSecondPost(currentSecond: Ref<number>) {
-  const queryKey = computed(() => ['post', currentSecond.value.toString()])
+export function useReactiveCurrentSecondPost(currentSecondDigit: Ref<number>) {
+  const queryKey = computed(() => ['post', currentSecondDigit.value.toString()])
 
   return useQuery({
     queryKey,
-    queryFn: () => getPost(currentSecond.value),
+    queryFn: () => getPost(currentSecondDigit.value),
     // Cache configuration
     ...DEFAULT_QUERIES_OPTIONS,
     staleTime: 1000 * 20, // Consider fresh for 20 seconds
     gcTime: 1000 * 60 * 5, // Keep cache for 5 minutes
-    enabled: computed(() => currentSecond.value >= 0),
+    enabled: computed(() => currentSecondDigit.value >= 0),
   })
 }
 
