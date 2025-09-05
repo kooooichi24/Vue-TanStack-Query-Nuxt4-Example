@@ -10,14 +10,14 @@ export const postQueryKeys = postKeys
 
 export async function useListPosts() {
   return useQuery({
-    queryKey: ['posts'],
+    queryKey: postKeys.list.queryKey,
     queryFn: () => fetch('https://jsonplaceholder.typicode.com/posts'),
   })
 }
 
 export async function useGetPost(id: string) {
   return useQuery({
-    queryKey: ['post', id],
+    queryKey: postKeys.get(id).queryKey,
     queryFn: () => fetch(`https://jsonplaceholder.typicode.com/posts/${id}`),
   })
 }
