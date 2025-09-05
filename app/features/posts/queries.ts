@@ -3,7 +3,7 @@ import { createQueryKeys } from "@lukemorales/query-key-factory";
 
 export const postQueryKeys = createQueryKeys('posts', {
   list: null,
-  get: (id: string) => [id],
+  get: (id: number) => [id],
 })
 
 export async function useListPosts() {
@@ -13,7 +13,7 @@ export async function useListPosts() {
   })
 }
 
-export async function useGetPost(id: string) {
+export async function useGetPost(id: number) {
   return useQuery({
     queryKey: postQueryKeys.get(id).queryKey,
     queryFn: () => fetch(`https://jsonplaceholder.typicode.com/posts/${id}`),
