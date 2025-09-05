@@ -7,7 +7,7 @@ export async function useListPosts() {
   })
 }
 
-export async function useGetPost(id: number) {
+export async function useGetPost(id: string) {
   return useQuery({
     queryKey: ['post', id],
     queryFn: () => fetch(`https://jsonplaceholder.typicode.com/posts/${id}`),
