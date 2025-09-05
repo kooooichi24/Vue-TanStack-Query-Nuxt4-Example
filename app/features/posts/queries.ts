@@ -48,14 +48,10 @@ export async function useCreatePost() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (): Promise<Post> => {
+    mutationFn: async (request: { title: string, body: string, userId: number }): Promise<Post> => {
       const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
         method: 'POST',
-        body: JSON.stringify({
-          title: 'foo',
-          body: 'bar',
-          userId: 1,
-        }),
+        body: JSON.stringify(request),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
