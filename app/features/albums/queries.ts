@@ -68,11 +68,10 @@ export async function useUpdateAlbum() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (request: { id: number, userId?: number, title?: string }): Promise<Album> => {
+    mutationFn: async (request: { id: number, title?: string }): Promise<Album> => {
       const response = await fetch(`https://jsonplaceholder.typicode.com/albums/${request.id}`, {
         method: 'PATCH',
         body: JSON.stringify({
-          ...(request.userId !== undefined && { userId: request.userId }),
           ...(request.title !== undefined && { title: request.title }),
         }),
         headers: {
