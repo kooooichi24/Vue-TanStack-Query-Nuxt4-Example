@@ -3,8 +3,7 @@ import { createQueryKeys } from "@lukemorales/query-key-factory";
 
 export const todoQueryKeys = createQueryKeys('todos', {
   list: null,
-  listByUserId: (userId: number) => [userId],
-  listByUserIds: (userIds: number[]) => [userIds],
+  search: (filters: { userIds?: number[] }) => [filters],
   get: (id: number) => [id],
 })
 
@@ -15,17 +14,10 @@ export async function useListTodos() {
   })
 }
 
-export async function useListTodosByUserId(userId: number) {
+export async function useSearchTodos(filters: { userIds?: number[] }) {
   return useQuery({
-    queryKey: todoQueryKeys.listByUserId(userId).queryKey,
-    queryFn: () => fetch(`https://jsonplaceholder.typicode.com/todos?userId=${userId}`),
-  })
-}
-
-export async function useListTodosByUserIds(userIds: number[]) {
-  return useQuery({
-    queryKey: todoQueryKeys.listByUserIds(userIds).queryKey,
-    queryFn: () => fetch(`https://jsonplaceholder.typicode.com/todos?${userIds.map(userId => `userId=${userId}`).join('&')}`),
+    queryKey: todoQueryKeys.search(filters).queryKey,
+    queryFn: () => fetch(`https://jsonplaceholder.typicode.com/todos?${filters.userIds?.map(userId => `userId=${userId}`).join('&')}`),
   })
 }
 

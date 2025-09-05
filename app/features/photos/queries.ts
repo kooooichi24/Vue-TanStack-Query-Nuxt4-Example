@@ -3,8 +3,7 @@ import { useQuery } from "@tanstack/vue-query"
 
 export const photoQueryKeys = createQueryKeys('photos', {
   list: null,
-  listByAlbumId: (albumId: number) => [albumId],
-  listByAlbumIds: (albumIds: number[]) => [albumIds],
+  search: (filters: { albumId?: number }) => [filters],
   get: (id: number) => [id],
 })
 
@@ -15,17 +14,10 @@ export async function useListPhotos() {
   })
 }
 
-export async function useListPhotosByAlbumId(albumId: number) {
+export async function useSearchPhotos(filters: { albumId?: number }) {
   return useQuery({
-    queryKey: photoQueryKeys.listByAlbumId(albumId).queryKey,
-    queryFn: () => fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`),
-  })
-}
-
-export async function useListPhotosByAlbumIds(albumIds: number[]) {
-  return useQuery({
-    queryKey: photoQueryKeys.listByAlbumIds(albumIds).queryKey,
-    queryFn: () => fetch(`https://jsonplaceholder.typicode.com/photos?${albumIds.map(albumId => `albumId=${albumId}`).join('&')}`),
+    queryKey: photoQueryKeys.search(filters).queryKey,
+    queryFn: () => fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${filters.albumId}`),
   })
 }
 

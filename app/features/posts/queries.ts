@@ -3,8 +3,7 @@ import { createQueryKeys } from "@lukemorales/query-key-factory";
 
 export const postQueryKeys = createQueryKeys('posts', {
   list: null,
-  listByUserId: (userId: number) => [userId],
-  listByUserIds: (userIds: number[]) => [userIds],
+  search: (filters: { userId?: number }) => [filters],
   get: (id: number) => [id],
 })
 
@@ -15,17 +14,10 @@ export async function useListPosts() {
   })
 }
 
-export async function useListPostsByUserId(userId: number) {
+export async function useSearchPosts(filters: { userId?: number }) {
   return useQuery({
-    queryKey: postQueryKeys.listByUserId(userId).queryKey,
-    queryFn: () => fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`),
-  })
-}
-
-export async function useListPostsByUserIds(userIds: number[]) {
-  return useQuery({
-    queryKey: postQueryKeys.listByUserIds(userIds).queryKey,
-    queryFn: () => fetch(`https://jsonplaceholder.typicode.com/posts?${userIds.map(userId => `userId=${userId}`).join('&')}`),
+    queryKey: postQueryKeys.search(filters).queryKey,
+    queryFn: () => fetch(`https://jsonplaceholder.typicode.com/posts?userId=${filters.userId}`),
   })
 }
 
