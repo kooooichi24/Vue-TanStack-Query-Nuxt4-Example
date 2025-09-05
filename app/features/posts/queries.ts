@@ -64,3 +64,45 @@ export async function useCreatePost() {
     },
   })
 }
+
+export async function useUpdatePost() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (request: { id: number, title?: string, body?: string }): Promise<Post> => {
+      const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${request.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          ...(request.title !== undefined && { title: request.title }),
+          ...(request.body !== undefined && { body: request.body }),
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+
+      return response.json()
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: postQueryKeys._def })
+    },
+  })
+}
+
+export async function useDeletePost() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (id: number): Promise<void> => {
+      await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: postQueryKeys._def })
+    },
+  })
+}
