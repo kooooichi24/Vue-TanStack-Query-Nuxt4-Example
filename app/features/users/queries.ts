@@ -117,3 +117,21 @@ export async function useUpdateUser() {
     },
   })
 }
+
+export async function useDeleteUser() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (id: number): Promise<void> => {
+      await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: userQueryKeys._def })
+    },
+  })
+}
