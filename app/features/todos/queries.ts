@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/vue-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/vue-query";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 
 type Todo = {
@@ -40,6 +40,69 @@ export async function useGetTodo(id: number) {
     queryFn: async (): Promise<Todo> => {
       const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
       return response.json()
+    },
+  })
+}
+
+export async function useCreateTodo() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (request: { userId: number, title: string, completed: boolean }): Promise<Todo> => {
+      const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
+        method: 'POST',
+        body: JSON.stringify(request),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+
+      return response.json()
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: todoQueryKeys._def })
+    },
+  })
+}
+
+export async function useUpdateTodo() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (request: { id: number, title?: string, completed?: boolean }): Promise<Todo> => {
+      const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${request.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          ...(request.title !== undefined && { title: request.title }),
+          ...(request.completed !== undefined && { completed: request.completed }),
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+
+      return response.json()
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: todoQueryKeys._def })
+    },
+  })
+}
+
+export async function useDeleteTodo() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (id: number): Promise<void> => {
+      await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: todoQueryKeys._def })
     },
   })
 }
