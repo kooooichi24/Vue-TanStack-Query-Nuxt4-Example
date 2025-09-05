@@ -1,4 +1,12 @@
 import { useQuery } from "@tanstack/vue-query";
+import { createQueryKeys } from "@lukemorales/query-key-factory";
+
+const postKeys = createQueryKeys('posts', {
+  list: null,
+  get: (id: string) => [id],
+})
+
+export const postQueryKeys = postKeys
 
 export async function useListPosts() {
   return useQuery({
