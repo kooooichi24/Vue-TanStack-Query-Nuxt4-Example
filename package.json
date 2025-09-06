@@ -15,7 +15,6 @@
     "@nuxt/test-utils": "^3.19.2",
     "@nuxt/ui": "^3.3.0",
     "@tanstack/vue-query": "^5.83.1",
-    "@tanstack/vue-table": "^8.21.3",
     "eslint": "^9.32.0",
     "nuxt": "^4.0.1",
     "typescript": "^5.8.3",
