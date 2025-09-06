@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/vue-query";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 
-type User = {
+export type User = {
   id: number
   name: string
   username: string
