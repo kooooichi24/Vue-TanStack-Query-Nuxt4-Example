@@ -6,12 +6,14 @@
       :data="data"
       :columns="columns"
       :loading="isLoading"
+      class="cursor-pointer"
+      @select="onRowSelect"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { TableColumn } from '@nuxt/ui';
+import type { TableColumn, TableRow } from '@nuxt/ui';
 import { useListPosts, type Post } from '~/features/posts/queries'
 import { useListUsers, type User } from '~/features/users/queries';
 
@@ -38,6 +40,10 @@ const data = computed(() => {
     username: userMap.get(post.userId)?.username ?? ""
   }))
 })
+
+const onRowSelect = (row: TableRow<TableData>) => {
+  navigateTo(`/posts/${row.original.id}`)
+}
 
 </script>
 
