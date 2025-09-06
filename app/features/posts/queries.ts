@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/vue-query";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 
-type Post = {
+export type Post = {
   id: number
   title: string
   body: string
