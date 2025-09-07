@@ -24,11 +24,11 @@ export async function useListPosts() {
   })
 }
 
-export async function useSearchPosts(filters: { userId?: number }) {
+export async function useSearchPosts(filters: Ref<{ userId?: number }>) {
   return useQuery({
-    queryKey: postQueryKeys.search(filters).queryKey,
+    queryKey: computed(() => postQueryKeys.search(filters.value).queryKey),
     queryFn: async (): Promise<Post[]> => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${filters.userId}`)
+      const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${filters.value.userId}`)
       return response.json()
     },
   })
