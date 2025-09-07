@@ -1,6 +1,6 @@
 <template>
   <div class="p-6">
-    <h1 class="text-2xl font-bold">Post: ID {{ postId }}</h1>
+    <h1 class="text-2xl font-bold">Post ID {{ postId }}</h1>
 
     <div v-if="isLoadingPost" class="text-gray-600">Loading...</div>
     
@@ -11,7 +11,7 @@
       <p>User ID: {{ post.userId }}</p>
     </div>
 
-    <h1 class="text-2xl font-bold">Related User: ID {{ userId }}</h1>
+    <h1 class="text-2xl font-bold">Related User ID {{ userId }}</h1>
 
     <div v-if="isLoadingUser" class="text-gray-600">Loading...</div>
     
