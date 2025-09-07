@@ -28,7 +28,7 @@ export type User = {
 export const userQueryKeys = createQueryKeys('users', {
   list: null,
   search: (filters: { usernames?: string[], emails?: string[] }) => [filters],
-  get: (id: number) => [id],
+  get: (id: number | undefined) => [id],
 })
 
 export async function useListUsers() {
@@ -59,13 +59,14 @@ export async function useSearchUsers(filters: { usernames?: string[], emails?: s
   })
 }
 
-export async function useGetUser(id: number) {
+export async function useGetUser(id: Ref<number | undefined>) {
   return useQuery({
-    queryKey: userQueryKeys.get(id).queryKey,
+    queryKey: userQueryKeys.get(id.value).queryKey,
     queryFn: async (): Promise<User> => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+      const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id.value}`)
       return response.json()
     },
+    enabled: computed(() => !!id.value),
   })
 }
 
