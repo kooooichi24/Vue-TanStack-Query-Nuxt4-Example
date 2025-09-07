@@ -23,7 +23,7 @@ const { data: users, isLoading: isLoadingUsers } = useListUsers()
 
 const isLoading = computed(() => isLoadingPosts.value || isLoadingUsers.value)
 
-type TableData =Post & Pick<User, 'username'>
+type TableData = Post & Pick<User, 'username'>
 
 const columns: TableColumn<TableData>[] = [
   { accessorKey: 'id', header: 'ID' },
