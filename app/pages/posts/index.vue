@@ -6,7 +6,7 @@
       :data="data"
       :columns="columns"
       :loading="isLoading"
-      class="cursor-pointer"
+      class="cursor-pointer border border-(--ui-border-accented) rounded-lg"
       @select="onRowSelect"
     />
   </div>
