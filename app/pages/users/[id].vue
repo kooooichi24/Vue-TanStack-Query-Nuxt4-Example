@@ -2,17 +2,19 @@
   <div class="p-6">
     <h1 class="text-2xl font-bold">User {{ userId }}</h1>
 
-    <UCard v-if="isLoadingUser" class="p-6 rounded-lg shadow">
-      <div class="space-y-3">
-        <USkeleton class="h-4 w-16" />
-        <USkeleton class="h-4 w-32" />
-        <USkeleton class="h-4 w-48" />
-        <USkeleton class="h-4 w-40" />
-        <USkeleton class="h-4 w-36" />
-        <USkeleton class="h-4 w-64" />
-        <USkeleton class="h-4 w-56" />
-      </div>
-    </UCard>
+    <div v-if="isLoadingUser" class="p-6 rounded-lg shadow">
+      <UCard>
+        <div class="space-y-3">
+          <USkeleton class="h-4 w-16" />
+          <USkeleton class="h-4 w-32" />
+          <USkeleton class="h-4 w-48" />
+          <USkeleton class="h-4 w-40" />
+          <USkeleton class="h-4 w-36" />
+          <USkeleton class="h-4 w-64" />
+          <USkeleton class="h-4 w-56" />
+        </div>
+      </UCard>
+    </div>
     
     <div v-else-if="user" class="p-6 rounded-lg shadow">
       <UCard>
