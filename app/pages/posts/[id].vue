@@ -2,7 +2,7 @@
   <div class="p-6">
     <h1 class="text-2xl font-bold">Post {{ postId }}</h1>
 
-    <div v-if="isLoadingPost" class="p-6 rounded-lg shadow">
+    <div v-if="isLoadingPost" class="py-6 rounded-lg shadow">
       <UCard>
         <div class="space-y-3">
           <USkeleton class="h-4 w-12" />
@@ -13,7 +13,7 @@
       </UCard>
     </div>
     
-    <div v-else-if="post" class="p-6 rounded-lg shadow">
+    <div v-else-if="post" class="py-6 rounded-lg shadow">
       <UCard>
         <p>ID: {{ post.id }}</p>
         <p>Title: {{ post.title }}</p>
@@ -24,7 +24,7 @@
 
     <h1 class="text-2xl font-bold">Related User{{ userId }}</h1>
 
-    <div v-if="isLoadingUser" class="p-6 rounded-lg shadow">
+    <div v-if="isLoadingUser" class="py-6 rounded-lg shadow">
       <UCard>
         <div class="space-y-3">
           <USkeleton class="h-4 w-12" />
@@ -35,7 +35,7 @@
       </UCard>
     </div>
     
-    <div v-else-if="user" class="p-6 rounded-lg shadow">
+    <div v-else-if="user" class="py-6 rounded-lg shadow">
       <UCard class="cursor-pointer hover:bg-gray-800" @click="navigateTo(`/users/${user.id}`)" >
         <p>ID: {{ user.id }}</p>
         <p>Username: {{ user.username }}</p>
