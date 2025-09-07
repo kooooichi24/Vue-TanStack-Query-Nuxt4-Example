@@ -2,7 +2,17 @@
   <div class="p-6">
     <h1 class="text-2xl font-bold">User {{ userId }}</h1>
 
-    <div v-if="isLoadingUser" class="text-gray-600">Loading...</div>
+    <UCard v-if="isLoadingUser" class="mb-6">
+      <div class="space-y-3">
+        <USkeleton class="h-4 w-16" />
+        <USkeleton class="h-4 w-32" />
+        <USkeleton class="h-4 w-48" />
+        <USkeleton class="h-4 w-40" />
+        <USkeleton class="h-4 w-36" />
+        <USkeleton class="h-4 w-64" />
+        <USkeleton class="h-4 w-56" />
+      </div>
+    </UCard>
     
     <div v-else-if="user" class="p-6 rounded-lg shadow">
       <UCard>
@@ -18,7 +28,16 @@
 
     <h1 class="text-2xl font-bold">Related Posts</h1>
 
-    <div v-if="isLoadingPosts" class="text-gray-600">Loading...</div>
+    <div v-if="isLoadingPosts" class="space-y-4">
+      <UCard v-for="n in 3" :key="n" class="mb-4">
+        <div class="space-y-3">
+          <USkeleton class="h-4 w-12" />
+          <USkeleton class="h-4 w-3/4" />
+          <USkeleton class="h-4 w-full" />
+          <USkeleton class="h-4 w-16" />
+        </div>
+      </UCard>
+    </div>
     
     <div v-else-if="posts" class="p-6 rounded-lg shadow">
       <UCard v-for="post in posts" :key="post.id" class="mb-4">
