@@ -2,7 +2,7 @@
   <div class="p-6">
     <h1 class="text-2xl font-bold">User {{ userId }}</h1>
 
-    <UCard v-if="isLoadingUser" class="mb-6">
+    <UCard v-if="isLoadingUser" class="p-6 rounded-lg shadow">
       <div class="space-y-3">
         <USkeleton class="h-4 w-16" />
         <USkeleton class="h-4 w-32" />
@@ -28,7 +28,7 @@
 
     <h1 class="text-2xl font-bold">Related Posts</h1>
 
-    <div v-if="isLoadingPosts" class="space-y-4">
+    <div v-if="isLoadingPosts" class="p-6 rounded-lg shadow">
       <UCard v-for="n in 3" :key="n" class="mb-4">
         <div class="space-y-3">
           <USkeleton class="h-4 w-12" />
