@@ -7,6 +7,7 @@
       :columns="columns"
       :loading="isLoading"
       class="cursor-pointer border border-(--ui-border-accented) rounded-lg"
+      sticky
       @select="onRowSelect"
     />
   </div>
