@@ -22,8 +22,8 @@
 import { useGetUser } from '~/features/users/queries'
 
 const route = useRoute()
-const userId = parseInt(route.params.id as string)
+const userId = computed(() => parseInt(route.params.id as string))
 
-const { data: user, isLoading: isLoadingUser } = await useGetUser(computed(() => userId))
+const { data: user, isLoading: isLoadingUser } = await useGetUser(userId)
 
 </script>
