@@ -1,12 +1,12 @@
 <template>
-  <div class="p-6">
+  <div class="h-full flex flex-col p-6">
     <h1 class="text-2xl font-bold mb-4">Users</h1>
 
     <UTable
       :data="data"
       :columns="columns"
       :loading="isLoading"
-      class="cursor-pointer border border-(--ui-border-accented) rounded-lg"
+      class="cursor-pointer border border-(--ui-border-accented) rounded-lg overflow-auto"
       @select="onRowSelect"
     />
   </div>
