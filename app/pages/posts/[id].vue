@@ -16,7 +16,6 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 import { useGetUser } from '~/features/users/queries'
 import { useGetPost } from '~/features/posts/queries'
