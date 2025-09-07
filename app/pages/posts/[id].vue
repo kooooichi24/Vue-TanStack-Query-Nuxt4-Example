@@ -2,7 +2,16 @@
   <div class="p-6">
     <h1 class="text-2xl font-bold">Post {{ postId }}</h1>
 
-    <div v-if="isLoadingPost" class="text-gray-600">Loading...</div>
+    <div v-if="isLoadingPost" class="p-6 rounded-lg shadow">
+      <UCard>
+        <div class="space-y-3">
+          <USkeleton class="h-4 w-12" />
+          <USkeleton class="h-4 w-3/4" />
+          <USkeleton class="h-4 w-full" />
+          <USkeleton class="h-4 w-16" />
+        </div>
+      </UCard>
+    </div>
     
     <div v-else-if="post" class="p-6 rounded-lg shadow">
       <UCard>
@@ -15,7 +24,16 @@
 
     <h1 class="text-2xl font-bold">Related User{{ userId }}</h1>
 
-    <div v-if="isLoadingUser" class="text-gray-600">Loading...</div>
+    <div v-if="isLoadingUser" class="p-6 rounded-lg shadow">
+      <UCard>
+        <div class="space-y-3">
+          <USkeleton class="h-4 w-12" />
+          <USkeleton class="h-4 w-3/4" />
+          <USkeleton class="h-4 w-full" />
+          <USkeleton class="h-4 w-16" />
+        </div>
+      </UCard>
+    </div>
     
     <div v-else-if="user" class="p-6 rounded-lg shadow">
       <UCard>
