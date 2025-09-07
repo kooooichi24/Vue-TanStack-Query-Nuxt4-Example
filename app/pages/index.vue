@@ -1,10 +1,7 @@
 <template>
   <div class="p-6">
-    <NuxtLink 
-      to="/posts" 
-      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-    >
-      Go to Posts
-    </NuxtLink>
+    <NuxtLink  to="/posts">Go to Posts</NuxtLink>
+    <br>
+    <NuxtLink  to="/users">Go to Users</NuxtLink>
   </div>
 </template>
