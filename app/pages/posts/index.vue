@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6">
+  <div class="h-screen flex flex-col p-6">
     <h1 class="text-2xl font-bold mb-4">Posts</h1>
 
     <UTable
