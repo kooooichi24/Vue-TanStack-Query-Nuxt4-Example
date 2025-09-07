@@ -36,7 +36,7 @@
     </div>
     
     <div v-else-if="user" class="p-6 rounded-lg shadow">
-      <UCard>
+      <UCard class="cursor-pointer hover:bg-gray-800" @click="navigateTo(`/users/${user.id}`)" >
         <p>ID: {{ user.id }}</p>
         <p>Username: {{ user.username }}</p>
         <p>Email: {{ user.email }}</p>

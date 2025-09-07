@@ -42,7 +42,7 @@
     </div>
     
     <div v-else-if="posts" class="p-6 rounded-lg shadow">
-      <UCard v-for="post in posts" :key="post.id" class="mb-4">
+      <UCard v-for="post in posts" :key="post.id" class="mb-4 cursor-pointer hover:bg-gray-800" @click="navigateTo(`/posts/${post.id}`)">
         <p><strong>ID: </strong>{{ post.id }}</p>
         <p><strong>Title: </strong>{{ post.title }}</p>
         <p><strong>Body: </strong>{{ post.body }}</p>
