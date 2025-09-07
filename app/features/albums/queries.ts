@@ -13,7 +13,7 @@ export const albumsQueryKeys = createQueryKeys('albums', {
   get: (id: number) => [id],
 })
 
-export async function useListAlbums() {
+export function useListAlbums() {
   return useQuery({
     queryKey: albumsQueryKeys.list.queryKey,
     queryFn: async (): Promise<Album[]> => {
@@ -23,7 +23,7 @@ export async function useListAlbums() {
   })
 }
 
-export async function useSearchAlbums(filters: { userId?: number }) {
+export function useSearchAlbums(filters: { userId?: number }) {
   return useQuery({
     queryKey: albumsQueryKeys.search(filters).queryKey,
     queryFn: async (): Promise<Album[]> => {
@@ -33,7 +33,7 @@ export async function useSearchAlbums(filters: { userId?: number }) {
   })
 }
 
-export async function useGetAlbum(id: number) {
+export function useGetAlbum(id: number) {
   return useQuery({
     queryKey: albumsQueryKeys.get(id).queryKey,
     queryFn: async (): Promise<Album> => {
@@ -43,7 +43,7 @@ export async function useGetAlbum(id: number) {
   })
 }
 
-export async function useCreateAlbum() {
+export function useCreateAlbum() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -64,7 +64,7 @@ export async function useCreateAlbum() {
   })
 }
 
-export async function useUpdateAlbum() {
+export function useUpdateAlbum() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -87,7 +87,7 @@ export async function useUpdateAlbum() {
   })
 }
 
-export async function useDeleteAlbum() {
+export function useDeleteAlbum() {
   const queryClient = useQueryClient()
 
   return useMutation({

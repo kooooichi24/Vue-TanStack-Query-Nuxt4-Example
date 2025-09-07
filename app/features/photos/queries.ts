@@ -15,7 +15,7 @@ export const photoQueryKeys = createQueryKeys('photos', {
   get: (id: number) => [id],
 })
 
-export async function useListPhotos() {
+export function useListPhotos() {
   return useQuery({
     queryKey: photoQueryKeys.list.queryKey,
     queryFn: async (): Promise<Photo[]> => {
@@ -25,7 +25,7 @@ export async function useListPhotos() {
   })
 }
 
-export async function useSearchPhotos(filters: { albumId?: number }) {
+export function useSearchPhotos(filters: { albumId?: number }) {
   return useQuery({
     queryKey: photoQueryKeys.search(filters).queryKey,
     queryFn: async (): Promise<Photo[]> => {
@@ -35,7 +35,7 @@ export async function useSearchPhotos(filters: { albumId?: number }) {
   })
 }
 
-export async function useGetPhoto(id: number) {
+export function useGetPhoto(id: number) {
   return useQuery({
     queryKey: photoQueryKeys.get(id).queryKey,
     queryFn: async (): Promise<Photo> => {
@@ -45,7 +45,7 @@ export async function useGetPhoto(id: number) {
   })
 }
 
-export async function useCreatePhoto() {
+export function useCreatePhoto() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -66,7 +66,7 @@ export async function useCreatePhoto() {
   })
 }
 
-export async function useUpdatePhoto() {
+export function useUpdatePhoto() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -91,7 +91,7 @@ export async function useUpdatePhoto() {
   })
 }
 
-export async function useDeletePhoto() {
+export function useDeletePhoto() {
   const queryClient = useQueryClient()
 
   return useMutation({

@@ -16,7 +16,7 @@
 import type { TableColumn, TableRow } from '@nuxt/ui';
 import { useListUsers, type User } from '~/features/users/queries';
 
-const { data, isLoading } = await useListUsers()
+const { data, isLoading } = useListUsers()
 
 const columns: TableColumn<User>[] = [
   { 

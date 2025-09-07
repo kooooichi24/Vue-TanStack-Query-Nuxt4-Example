@@ -18,8 +18,8 @@ import type { TableColumn, TableRow } from '@nuxt/ui';
 import { useListPosts, type Post } from '~/features/posts/queries'
 import { useListUsers, type User } from '~/features/users/queries';
 
-const { data: posts, isLoading: isLoadingPosts } = await useListPosts()
-const { data: users, isLoading: isLoadingUsers } = await useListUsers()
+const { data: posts, isLoading: isLoadingPosts } = useListPosts()
+const { data: users, isLoading: isLoadingUsers } = useListUsers()
 
 const isLoading = computed(() => isLoadingPosts.value || isLoadingUsers.value)
 

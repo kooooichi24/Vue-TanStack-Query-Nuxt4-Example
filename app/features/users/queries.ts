@@ -31,7 +31,7 @@ export const userQueryKeys = createQueryKeys('users', {
   get: (id: number | undefined) => [id],
 })
 
-export async function useListUsers() {
+export function useListUsers() {
   return useQuery({
     queryKey: userQueryKeys.list.queryKey,
     queryFn: async (): Promise<User[]> => {
@@ -41,7 +41,7 @@ export async function useListUsers() {
   })
 }
 
-export async function useSearchUsers(filters: { usernames?: string[], emails?: string[] }) {
+export function useSearchUsers(filters: { usernames?: string[], emails?: string[] }) {
   const queryParams = new URLSearchParams();
   if (filters.usernames) {
     filters.usernames.forEach(username => queryParams.append('username', username));
@@ -59,7 +59,7 @@ export async function useSearchUsers(filters: { usernames?: string[], emails?: s
   })
 }
 
-export async function useGetUser(id: Ref<number | undefined>) {
+export function useGetUser(id: Ref<number | undefined>) {
   return useQuery({
     queryKey: computed(() => userQueryKeys.get(id.value).queryKey),
     queryFn: async (): Promise<User> => {
@@ -70,7 +70,7 @@ export async function useGetUser(id: Ref<number | undefined>) {
   })
 }
 
-export async function useCreateUser() {
+export function useCreateUser() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -91,7 +91,7 @@ export async function useCreateUser() {
   })
 }
 
-export async function useUpdateUser() {
+export function useUpdateUser() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -119,7 +119,7 @@ export async function useUpdateUser() {
   })
 }
 
-export async function useDeleteUser() {
+export function useDeleteUser() {
   const queryClient = useQueryClient()
 
   return useMutation({

@@ -57,8 +57,8 @@ import { useGetPost } from '~/features/posts/queries'
 const route = useRoute()
 const postId = parseInt(route.params.id as string)
 
-const { data: post, isLoading: isLoadingPost } = await useGetPost(postId)
+const { data: post, isLoading: isLoadingPost } = useGetPost(postId)
 const userId = computed(() => post.value?.userId)
-const { data: user, isLoading: isLoadingUser } = await useGetUser(userId)
+const { data: user, isLoading: isLoadingUser } = useGetUser(userId)
 
 </script>

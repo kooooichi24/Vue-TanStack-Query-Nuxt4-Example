@@ -14,7 +14,7 @@ export const postQueryKeys = createQueryKeys('posts', {
   get: (id: number) => [id],
 })
 
-export async function useListPosts() {
+export function useListPosts() {
   return useQuery({
     queryKey: postQueryKeys.list.queryKey,
     queryFn: async (): Promise<Post[]> => {
@@ -24,7 +24,7 @@ export async function useListPosts() {
   })
 }
 
-export async function useSearchPosts(filters: Ref<{ userId?: number }>) {
+export function useSearchPosts(filters: Ref<{ userId?: number }>) {
   return useQuery({
     queryKey: computed(() => postQueryKeys.search(filters.value).queryKey),
     queryFn: async (): Promise<Post[]> => {
@@ -34,7 +34,7 @@ export async function useSearchPosts(filters: Ref<{ userId?: number }>) {
   })
 }
 
-export async function useGetPost(id: number) {
+export function useGetPost(id: number) {
   return useQuery({
     queryKey: postQueryKeys.get(id).queryKey,
     queryFn: async (): Promise<Post> => {
@@ -44,7 +44,7 @@ export async function useGetPost(id: number) {
   })
 }
 
-export async function useCreatePost() {
+export function useCreatePost() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -65,7 +65,7 @@ export async function useCreatePost() {
   })
 }
 
-export async function useUpdatePost() {
+export function useUpdatePost() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -89,7 +89,7 @@ export async function useUpdatePost() {
   })
 }
 
-export async function useDeletePost() {
+export function useDeletePost() {
   const queryClient = useQueryClient()
 
   return useMutation({

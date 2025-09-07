@@ -14,7 +14,7 @@ export const todoQueryKeys = createQueryKeys('todos', {
   get: (id: number) => [id],
 })
 
-export async function useListTodos() {
+export function useListTodos() {
   return useQuery({
     queryKey: todoQueryKeys.list.queryKey,
     queryFn: async (): Promise<Todo[]> => {
@@ -24,7 +24,7 @@ export async function useListTodos() {
   })
 }
 
-export async function useSearchTodos(filters: { userIds?: number[] }) {
+export function useSearchTodos(filters: { userIds?: number[] }) {
   return useQuery({
     queryKey: todoQueryKeys.search(filters).queryKey,
     queryFn: async (): Promise<Todo[]> => {
@@ -34,7 +34,7 @@ export async function useSearchTodos(filters: { userIds?: number[] }) {
   })
 }
 
-export async function useGetTodo(id: number) {
+export function useGetTodo(id: number) {
   return useQuery({
     queryKey: todoQueryKeys.get(id).queryKey,
     queryFn: async (): Promise<Todo> => {
@@ -44,7 +44,7 @@ export async function useGetTodo(id: number) {
   })
 }
 
-export async function useCreateTodo() {
+export function useCreateTodo() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -65,7 +65,7 @@ export async function useCreateTodo() {
   })
 }
 
-export async function useUpdateTodo() {
+export function useUpdateTodo() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -89,7 +89,7 @@ export async function useUpdateTodo() {
   })
 }
 
-export async function useDeleteTodo() {
+export function useDeleteTodo() {
   const queryClient = useQueryClient()
 
   return useMutation({

@@ -15,7 +15,7 @@ export const commentQueryKeys = createQueryKeys('comments', {
   get: (id: number) => [id],
 })
 
-export async function useListComments() {
+export function useListComments() {
   return useQuery({
     queryKey: commentQueryKeys.list.queryKey,
     queryFn: async (): Promise<Comment[]> => {
@@ -25,7 +25,7 @@ export async function useListComments() {
   })
 }
 
-export async function useSearchComments(filters: { postId?: number }) {
+export function useSearchComments(filters: { postId?: number }) {
   return useQuery({
     queryKey: commentQueryKeys.search(filters).queryKey,
     queryFn: async (): Promise<Comment[]> => {
@@ -35,7 +35,7 @@ export async function useSearchComments(filters: { postId?: number }) {
   })
 }
 
-export async function useGetComment(id: number) {
+export function useGetComment(id: number) {
   return useQuery({
     queryKey: commentQueryKeys.get(id).queryKey,
     queryFn: async (): Promise<Comment> => {
@@ -45,7 +45,7 @@ export async function useGetComment(id: number) {
   })
 }
 
-export async function useCreateComment() {
+export function useCreateComment() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -66,7 +66,7 @@ export async function useCreateComment() {
   })
 }
 
-export async function useUpdateComment() {
+export function useUpdateComment() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -91,7 +91,7 @@ export async function useUpdateComment() {
   })
 }
 
-export async function useDeleteComment() {
+export function useDeleteComment() {
   const queryClient = useQueryClient()
 
   return useMutation({
