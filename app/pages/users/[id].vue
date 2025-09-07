@@ -1,6 +1,6 @@
 <template>
   <div class="p-6">
-    <h1 class="text-2xl font-bold">User ID: {{ userId }}</h1>
+    <h1 class="text-2xl font-bold">User {{ userId }}</h1>
 
     <div v-if="isLoadingUser" class="text-gray-600">Loading...</div>
     
