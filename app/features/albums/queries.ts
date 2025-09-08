@@ -9,8 +9,8 @@ type Album = {
 
 export const albumsQueryKeys = createQueryKeys('albums', {
   list: null,
-  search: (filters: { userId?: number }) => [filters],
-  get: (id: number) => [id],
+  search: (filters: MaybeRefOrGetter<{ userId?: number }>) => [filters],
+  get: (id: MaybeRefOrGetter<number>) => [id],
 })
 
 export function useListAlbums() {
@@ -23,21 +23,21 @@ export function useListAlbums() {
   })
 }
 
-export function useSearchAlbums(filters: { userId?: number }) {
+export function useSearchAlbums(filters: MaybeRefOrGetter<{ userId?: number }>) {
   return useQuery({
     queryKey: albumsQueryKeys.search(filters).queryKey,
     queryFn: async (): Promise<Album[]> => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/albums?userId=${filters.userId}`)
+      const response = await fetch(`https://jsonplaceholder.typicode.com/albums?userId=${toValue(filters).userId}`)
       return response.json()
     },
   })
 }
 
-export function useGetAlbum(id: number) {
+export function useGetAlbum(id: MaybeRefOrGetter<number>) {
   return useQuery({
     queryKey: albumsQueryKeys.get(id).queryKey,
     queryFn: async (): Promise<Album> => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/albums/${id}`)
+      const response = await fetch(`https://jsonplaceholder.typicode.com/albums/${toValue(id)}`)
       return response.json()
     },
   })

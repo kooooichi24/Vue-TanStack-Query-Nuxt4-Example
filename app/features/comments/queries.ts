@@ -11,8 +11,8 @@ type Comment = {
 
 export const commentQueryKeys = createQueryKeys('comments', {
   list: null,
-  search: (filters: { postId?: number }) => [filters],
-  get: (id: number) => [id],
+  search: (filters: MaybeRefOrGetter<{ postId?: number }>) => [filters],
+  get: (id: MaybeRefOrGetter<number>) => [id],
 })
 
 export function useListComments() {
@@ -25,21 +25,21 @@ export function useListComments() {
   })
 }
 
-export function useSearchComments(filters: { postId?: number }) {
+export function useSearchComments(filters: MaybeRefOrGetter<{ postId?: number }>) {
   return useQuery({
     queryKey: commentQueryKeys.search(filters).queryKey,
     queryFn: async (): Promise<Comment[]> => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${filters.postId}`)
+      const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${toValue(filters).postId}`)
       return response.json()
     },
   })
 }
 
-export function useGetComment(id: number) {
+export function useGetComment(id: MaybeRefOrGetter<number>) {
   return useQuery({
     queryKey: commentQueryKeys.get(id).queryKey,
     queryFn: async (): Promise<Comment> => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/comments/${id}`)
+      const response = await fetch(`https://jsonplaceholder.typicode.com/comments/${toValue(id)}`)
       return response.json()
     },
   })

@@ -11,8 +11,8 @@ type Photo = {
 
 export const photoQueryKeys = createQueryKeys('photos', {
   list: null,
-  search: (filters: { albumId?: number }) => [filters],
-  get: (id: number) => [id],
+  search: (filters: MaybeRefOrGetter<{ albumId?: number }>) => [filters],
+  get: (id: MaybeRefOrGetter<number>) => [id],
 })
 
 export function useListPhotos() {
@@ -25,21 +25,21 @@ export function useListPhotos() {
   })
 }
 
-export function useSearchPhotos(filters: { albumId?: number }) {
+export function useSearchPhotos(filters: MaybeRefOrGetter<{ albumId?: number }>) {
   return useQuery({
     queryKey: photoQueryKeys.search(filters).queryKey,
     queryFn: async (): Promise<Photo[]> => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${filters.albumId}`)
+      const response = await fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${toValue(filters).albumId}`)
       return response.json()
     },
   })
 }
 
-export function useGetPhoto(id: number) {
+export function useGetPhoto(id: MaybeRefOrGetter<number>) {
   return useQuery({
     queryKey: photoQueryKeys.get(id).queryKey,
     queryFn: async (): Promise<Photo> => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/photos/${id}`)
+      const response = await fetch(`https://jsonplaceholder.typicode.com/photos/${toValue(id)}`)
       return response.json()
     },
   })
