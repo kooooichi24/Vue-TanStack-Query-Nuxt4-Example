@@ -27,8 +27,8 @@ export type User = {
 
 export const userQueryKeys = createQueryKeys('users', {
   list: null,
-  search: (filters: { usernames?: string[], emails?: string[] }) => [filters],
-  get: (id: number | undefined) => [id],
+  search: (filters: MaybeRefOrGetter<{ usernames?: string[], emails?: string[] }>) => [filters],
+  get: (id: MaybeRefOrGetter<number | undefined>) => [id],
 })
 
 export function useListUsers() {
@@ -41,13 +41,14 @@ export function useListUsers() {
   })
 }
 
-export function useSearchUsers(filters: { usernames?: string[], emails?: string[] }) {
+export function useSearchUsers(filters: MaybeRefOrGetter<{ usernames?: string[], emails?: string[] }>) {
   const queryParams = new URLSearchParams();
-  if (filters.usernames) {
-    filters.usernames.forEach(username => queryParams.append('username', username));
+  const filtersValue = toValue(filters)
+  if (filtersValue.usernames) {
+    filtersValue.usernames.forEach(username => queryParams.append('username', username));
   }
-  if (filters.emails) {
-    filters.emails.forEach(email => queryParams.append('email', email));
+  if (filtersValue.emails) {
+    filtersValue.emails.forEach(email => queryParams.append('email', email));
   }
 
   return useQuery({
@@ -59,14 +60,14 @@ export function useSearchUsers(filters: { usernames?: string[], emails?: string[
   })
 }
 
-export function useGetUser(id: Ref<number | undefined>) {
+export function useGetUser(id: MaybeRefOrGetter<number | undefined>) {
   return useQuery({
-    queryKey: computed(() => userQueryKeys.get(id.value).queryKey),
+    queryKey: userQueryKeys.get(id).queryKey,
     queryFn: async (): Promise<User> => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id.value}`)
+      const response = await fetch(`https://jsonplaceholder.typicode.com/users/${toValue(id)}`)
       return response.json()
     },
-    enabled: computed(() => !!id.value),
+    enabled: () => !!toValue(id),
   })
 }
 

@@ -10,8 +10,8 @@ export type Post = {
 
 export const postQueryKeys = createQueryKeys('posts', {
   list: null,
-  search: (filters: { userId?: number }) => [filters],
-  get: (id: number) => [id],
+  search: (filters: MaybeRefOrGetter<{ userId?: number }>) => [filters],
+  get: (id: MaybeRefOrGetter<number>) => [id],
 })
 
 export function useListPosts() {
@@ -24,21 +24,21 @@ export function useListPosts() {
   })
 }
 
-export function useSearchPosts(filters: Ref<{ userId?: number }>) {
+export function useSearchPosts(filters: MaybeRefOrGetter<{ userId?: number }>) {
   return useQuery({
-    queryKey: computed(() => postQueryKeys.search(filters.value).queryKey),
+    queryKey: postQueryKeys.search(filters).queryKey,
     queryFn: async (): Promise<Post[]> => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${filters.value.userId}`)
+      const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${toValue(filters).userId}`)
       return response.json()
     },
   })
 }
 
-export function useGetPost(id: number) {
+export function useGetPost(id: MaybeRefOrGetter<number>) {
   return useQuery({
     queryKey: postQueryKeys.get(id).queryKey,
     queryFn: async (): Promise<Post> => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${toValue(id)}`)
       return response.json()
     },
   })

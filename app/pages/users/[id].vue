@@ -47,12 +47,10 @@ import { useSearchPosts, type Post } from '~/features/posts/queries'
 import { useGetUser, type User } from '~/features/users/queries'
 
 const route = useRoute()
-const userId = computed(() => parseInt(route.params.id as string))
+const userId = parseInt(route.params.id as string)
 
 const { data: user, isLoading: isLoadingUser } = useGetUser(userId)
-
-const searchPostsParams = computed(() => ({ userId: userId.value }))
-const { data: posts, isLoading: isLoadingPosts } = useSearchPosts(searchPostsParams)
+const { data: posts, isLoading: isLoadingPosts } = useSearchPosts({ userId })
 
 
 type TableData = Post & Pick<User, 'username'>

@@ -22,7 +22,7 @@
       </UCard>
     </div>
 
-    <h1 class="text-2xl font-bold">Related User{{ userId }}</h1>
+    <h1 class="text-2xl font-bold">Related User{{ post?.userId }}</h1>
 
     <div v-if="isLoadingUser" class="py-6 rounded-lg shadow">
       <UCard>
@@ -58,7 +58,6 @@ const route = useRoute()
 const postId = parseInt(route.params.id as string)
 
 const { data: post, isLoading: isLoadingPost } = useGetPost(postId)
-const userId = computed(() => post.value?.userId)
-const { data: user, isLoading: isLoadingUser } = useGetUser(userId)
+const { data: user, isLoading: isLoadingUser } = useGetUser(() => post.value?.userId)
 
 </script>
